@@ -20,17 +20,21 @@ def parse_periode(p):
 # =========================
 # 1. Baca Excel
 # =========================
-file_path = "pkrt_dummy.xlsx"
+file_path = "pdb_dummy.xlsx"
 
-# df = pd.read_excel(file_path, sheet_name="Nilai PKRT Bulanan")
-df = pd.read_excel(file_path, sheet_name="Nilai PKRT Triwulanan")
+# df = pd.read_excel(file_path, sheet_name="ADHB")
+df = pd.read_excel(file_path, sheet_name="ADHK")
 
 # =========================
 # 2. Wide → Long
 # =========================
-df_long = df.melt(id_vars=["Kode", "Deskripsi"], var_name="periode", value_name="nilai")
+df_long = df.melt(
+    id_vars=["Kode", "Deskripsi", "Jenis"], var_name="periode", value_name="nilai"
+)
 
-df_long.rename(columns={"Kode": "kode", "Deskripsi": "deskripsi"}, inplace=True)
+df_long.rename(
+    columns={"Kode": "kode", "Deskripsi": "deskripsi", "Jenis": "jenis"}, inplace=True
+)
 
 # =========================
 # 3. Bersihkan nilai
@@ -67,10 +71,10 @@ cur = conn.cursor()
 # 6. Insert ke DB
 # =========================
 insert_query = """
-INSERT INTO pkrt
-(kode, deskripsi, tahun, freq, period, nilai, created_at)
-VALUES (%s,%s,%s,%s,%s,%s,%s)
-ON CONFLICT (kode, tahun, freq, period)
+INSERT INTO pdb
+(kode, deskripsi, jenis, tahun, freq, period, nilai, created_at)
+VALUES (%s,%s,%s,%s,%s,%s,%s,%s)
+ON CONFLICT (kode, tahun, jenis, freq, period)
 DO UPDATE SET
     nilai = EXCLUDED.nilai
 """
@@ -81,6 +85,7 @@ for _, row in df_long.iterrows():
         (
             row["kode"],
             row["deskripsi"],
+            row["jenis"],
             row["tahun"],
             row["freq"],
             row["period"],
