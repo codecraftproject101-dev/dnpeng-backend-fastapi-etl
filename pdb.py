@@ -22,8 +22,8 @@ def parse_periode(p):
 # =========================
 file_path = "pdb_dummy.xlsx"
 
-# df = pd.read_excel(file_path, sheet_name="ADHB")
-df = pd.read_excel(file_path, sheet_name="ADHK")
+df = pd.read_excel(file_path, sheet_name="ADHB")
+# df = pd.read_excel(file_path, sheet_name="ADHK")
 
 # =========================
 # 2. Wide → Long
