@@ -22,8 +22,8 @@ def parse_periode(p):
 # =========================
 file_path = "pkrt_dummy.xlsx"
 
-df = pd.read_excel(file_path, sheet_name="Nilai PKRT Bulanan")
-# df = pd.read_excel(file_path, sheet_name="Nilai PKRT Triwulanan")
+# df = pd.read_excel(file_path, sheet_name="Nilai PKRT Bulanan")
+df = pd.read_excel(file_path, sheet_name="Nilai PKRT Triwulanan")
 
 # =========================
 # 2. Wide → Long
