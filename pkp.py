@@ -20,7 +20,7 @@ def parse_periode(p):
 # =========================
 # 1. Baca Excel
 # =========================
-file_path = "pkp_final.xlsx"
+file_path = "pkp_dummy.xlsx"
 
 df = pd.read_excel(file_path, sheet_name="Bulanan")
 
