@@ -20,10 +20,10 @@ def parse_periode(p):
 # =========================
 # 1. Baca Excel
 # =========================
-file_path = "pdb_dummy.xlsx"
+file_path = "pdb_final.xlsx"
 
-df = pd.read_excel(file_path, sheet_name="ADHB")
-# df = pd.read_excel(file_path, sheet_name="ADHK")
+# df = pd.read_excel(file_path, sheet_name="ADHB")
+df = pd.read_excel(file_path, sheet_name="ADHK")
 
 # =========================
 # 2. Wide → Long

@@ -20,10 +20,9 @@ def parse_periode(p):
 # =========================
 # 1. Baca Excel
 # =========================
-file_path = "pkrt_final.xlsx"
+file_path = "pkp_final.xlsx"
 
-df = pd.read_excel(file_path, sheet_name="Nilai PKRT Bulanan")
-# df = pd.read_excel(file_path, sheet_name="Nilai PKRT Triwulanan")
+df = pd.read_excel(file_path, sheet_name="Bulanan")
 
 # =========================
 # 2. Wide → Long
@@ -79,7 +78,7 @@ cur = conn.cursor()
 # 6. Insert ke DB
 # =========================
 insert_query = """
-INSERT INTO pkrt
+INSERT INTO pkp
 (kode, deskripsi, tahun, freq, period, nilai, created_at, satuan, konversi)
 VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s)
 ON CONFLICT (kode, tahun, freq, period)
